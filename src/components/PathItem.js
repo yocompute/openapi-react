@@ -1,18 +1,17 @@
 import React from 'react';
 import Operation from './Operation';
 
-function PathItem(props) {
+function PathItem({pathItem, url}) {
     const operations = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch'];
-    const pathItem = props.pathItem;
+
     return (
         <div>
             {
                 operations.map(op =>
                     <div key={op} >
-                        {/* <div>{op}</div> */}
                         {
                             pathItem[op] &&
-                            <Operation operation={pathItem[op]} />
+                            <Operation operation={pathItem[op]} path={ {url, op} }/>
 
                         }
                     </div>

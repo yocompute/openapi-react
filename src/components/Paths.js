@@ -12,10 +12,9 @@ function Paths({ paths }) {
             {
                 urls.map(url =>
                     <div key={url}>
-                        <div>{url}</div>
                         {
                             paths[url] &&
-                            <PathItem pathItem={paths[url]} />
+                            <PathItem pathItem={paths[url]} url={url}/>
                         }
                     </div>
                 )
