@@ -21,7 +21,7 @@ const styles = {
         paddingLeft: '20px',
         fontSize: '14px'
     }
-}
+};
 
 const LeftNav = ({data, theme, onSelect}) => {
 
@@ -38,7 +38,7 @@ const LeftNav = ({data, theme, onSelect}) => {
 
     const handleSelect = item => {
         onSelect(item);
-    }
+    };
 
     return <div style={leftNavStyle}>
         {

@@ -39,7 +39,7 @@ export const OpenApi = ({ spec, theme }) => {
    */
   const handleSelect = item => {
     // jump to menuMap
-  }
+  };
 
   return (
 

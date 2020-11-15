@@ -4,7 +4,7 @@ import Paths from './Paths';
 const styles = {
     width: 'calc(100% - 260px)',
     float: 'left'
-}
+};
 
 function Schema({spec, theme}){
 
