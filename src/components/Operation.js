@@ -1,6 +1,7 @@
 import React from 'react';
 import Parameter from './Parameter';
 import Response from './Response';
+import HttpIconText from './common/HttpIconText';
 
 const styles = {
     block: {
@@ -41,7 +42,9 @@ function Operation({ operation, path, theme }) {
             }
             {
                 path &&
-                <div style={styles.path}>{`[${path.op}] ${path.url}`}</div>
+                <div style={styles.path}>
+                    <HttpIconText path={path} />
+                </div>
             }
             {
                 operation.parameters && operation.parameters.length > 0 &&
