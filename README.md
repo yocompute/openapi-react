@@ -10,16 +10,6 @@
 npm install --save openapi-react
 ```
 
-### Git clone Install and run example
-```bash
-git clone https://github.com/yocompute/openapi-react.git
-cd openapi-react
-npm run build
-cd example
-npm i
-npm start
-```
-
 
 ## Usage
 
@@ -61,3 +51,15 @@ class Example extends Component {
 ## License
 
 MIT © [zlkca](https://github.com/zlkca)
+
+
+
+#### run example
+```bash
+git clone https://github.com/yocompute/openapi-react.git
+cd openapi-react
+npm run build
+cd example
+npm i
+npm start
+```

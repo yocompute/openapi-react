@@ -10,7 +10,7 @@ export const OpenApi = ({ spec, theme }) => {
     const menuMap = {};
     
     spec.tags.forEach(tag => {
-      menuMap[tag.name] = {name: tag.name, items: [], expanded: false};
+      menuMap[tag.name] = {name: tag.name, items: [], expanded: true};
     });
 
     pathKeys.forEach(pk => {
