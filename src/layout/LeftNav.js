@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
 
+const { innerHeight } = window;
+
 const styles = {
     leftNav:{
         width: '260px',
+        height: innerHeight,
+        // overflowY: 'scroll',
         float: 'left',
     },
 
@@ -50,7 +54,7 @@ const LeftNav = ({data, theme, onSelect}) => {
                         style={styles.subMenuItem}
                         key={it.operation + it.path}
                         onClick={() => handleSelect(it)}>
-                        {`[${it.operation}] ${it.summary}`}
+                        {`${it.summary}`}
                         </div>)
                 }
             </div>)
