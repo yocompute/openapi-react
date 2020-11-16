@@ -4,20 +4,13 @@
 
 [![NPM](https://img.shields.io/npm/v/openapi-react.svg)](https://www.npmjs.com/package/openapi-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+## Demo
+[See our Demo](https://doc.yocompute.com/)
+
 ## Install
 
 ```bash
 npm install --save openapi-react
-```
-
-### Git clone Install and run example
-```bash
-git clone https://github.com/yocompute/openapi-react.git
-cd openapi-react
-npm run build
-cd example
-npm i
-npm start
 ```
 
 
@@ -61,3 +54,15 @@ class Example extends Component {
 ## License
 
 MIT © [zlkca](https://github.com/zlkca)
+
+
+
+#### run example
+```bash
+git clone https://github.com/yocompute/openapi-react.git
+cd openapi-react
+npm run build
+cd example
+npm i
+npm start
+```
