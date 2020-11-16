@@ -2,6 +2,7 @@ import React from 'react';
 import Parameter from './Parameter';
 import Response from './Response';
 import HttpIconText from './common/HttpIconText';
+import Playground from './common/Playground';
 
 const styles = {
     block: {
@@ -63,6 +64,7 @@ function Operation({ operation, path, theme }) {
                     }
                 </div>
             }
+            <Playground path={path} operation={operation}/>
         </div>
     );
 }
