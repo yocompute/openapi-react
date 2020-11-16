@@ -43,7 +43,7 @@ export const OpenApi = ({ spec, theme }) => {
 
   return (
 
-    <div>
+    <div style={{height: '100%'}}>
       <LeftNav 
         data={getMenuMap(spec)}
         theme={theme && theme.layout ? theme.layout: {}}

@@ -1,8 +1,12 @@
 import React from 'react';
 import Paths from './Paths';
 
+const { innerHeight } = window;
+
 const styles = {
     width: 'calc(100% - 260px)',
+    height: innerHeight,
+    overflowY: 'scroll',
     float: 'left'
 };
 
