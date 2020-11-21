@@ -64,7 +64,11 @@ function Operation({ operation, route, theme }) {
                     }
                 </div>
             }
+<<<<<<< HEAD
             <Playground route={route} operation={operation}/>
+=======
+            <Playground path={path} operation={operation}/>
+>>>>>>> 5fcc17ce3fb6860f13ff7e74ccd9cf28f67674a5
         </div>
     );
 }
