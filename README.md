@@ -1,6 +1,6 @@
 # openapi-react
 
-> A better swagger 2.0 document than swagger-ui and redoc ! (openapi spec support is coming soon! )
+> A better swagger 2.0 document than swagger-ui and redoc ! zero dependencies and much more smaller size. (openapi spec support is coming soon! )
 
 [![NPM](https://img.shields.io/npm/v/openapi-react.svg)](https://www.npmjs.com/package/openapi-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 

@@ -1,6 +1,6 @@
 {
   "name": "openapi-react",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "openapi, swagger document",
   "author": "zlkca",
   "license": "MIT",
@@ -54,7 +54,5 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "classnames": "^2.2.6"
-  }
+  "dependencies": {}
 }
