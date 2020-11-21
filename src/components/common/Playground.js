@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import HttpIconText from './HttpIconText'
+import PlaygroundResponse from './PlaygroundResponse'
 
 const styles = {
     param: {
@@ -38,6 +39,7 @@ const Playground = ({ route, operation, theme }) => {
 
     const [mode, setMode] = useState('view');
     const [params, setParams] = useState(getParams());
+    const [rsp, setResponse] = useState();
     const handleTry = () => {
         setMode('try');
     }
@@ -106,11 +108,11 @@ const Playground = ({ route, operation, theme }) => {
                 // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
                 // body: JSON.stringify(data) // body data type must match "Content-Type" header
             })
-            .then(rsp => rsp.json())
-            .then( d => {
-                const t = d;
-                console.log(d);
+            .then( r => { //rsp => rsp.json())
+                r.text().then( d => {
+                setResponse({status: r.status, statusText: r.statusText, value: d});
                 // setMode('try');
+                });
             }).catch(e => {
                 console.log(e);
             })
@@ -150,6 +152,13 @@ const Playground = ({ route, operation, theme }) => {
                 </div>
             }
         </form>
+            {
+                mode === 'try' && rsp &&
+                <div style={styles.response}>
+                    <div>Server Response:</div>
+                    <PlaygroundResponse rsp={rsp} />
+                </div>
+            }
     </div>
 }
 
