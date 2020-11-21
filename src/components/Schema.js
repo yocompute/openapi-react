@@ -18,7 +18,11 @@ function Schema({spec, theme}){
     
     return (
         <div style={myStyle}>
-            <Paths paths={spec.paths} />
+            <Paths
+            paths={spec.paths} 
+            host={spec.host}
+            schemes={spec.schemes}
+            basePath={spec.basePath} />
         </div>
     );
 }
