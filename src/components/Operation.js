@@ -29,7 +29,7 @@ const styles = {
     },
 };
 
-function Operation({ operation, path, theme }) {
+function Operation({ operation, route, theme }) {
     return (
         <div style={styles.block}>
             {
@@ -42,9 +42,9 @@ function Operation({ operation, path, theme }) {
                 <div style={styles.description}>{operation.description}</div>
             }
             {
-                path &&
+                route &&
                 <div style={styles.path}>
-                    <HttpIconText path={path} />
+                    <HttpIconText route={route} />
                 </div>
             }
             {
@@ -64,7 +64,11 @@ function Operation({ operation, path, theme }) {
                     }
                 </div>
             }
+<<<<<<< HEAD
+            <Playground route={route} operation={operation}/>
+=======
             <Playground path={path} operation={operation}/>
+>>>>>>> 5fcc17ce3fb6860f13ff7e74ccd9cf28f67674a5
         </div>
     );
 }
