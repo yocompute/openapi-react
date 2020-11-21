@@ -1,7 +1,7 @@
 import React from 'react';
 import PathItem from './PathItem';
 
-function Paths({ paths }) {
+function Paths({ paths, host, schemes, basePath }) {
     const urls = Object.keys(paths);
 
     // urls.forEach(url => {
@@ -14,7 +14,7 @@ function Paths({ paths }) {
                     <div key={url}>
                         {
                             paths[url] &&
-                            <PathItem pathItem={paths[url]} url={url}/>
+                            <PathItem pathItem={paths[url]} route={{url, host, schemes, basePath}}/>
                         }
                     </div>
                 )

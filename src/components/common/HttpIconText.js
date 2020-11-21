@@ -16,12 +16,12 @@ const styles = {
 }
 
 // path { op, url }
-const HttpIconText = ({path, theme}) => {
+const HttpIconText = ({route, theme}) => {
     return <div style={styles.row}>
         <div style={styles.icon} >
-            <HttpMethodIcon httpMethod={{text: path.op}} />
+            <HttpMethodIcon httpMethod={{text: route.op}} />
         </div>
-        <div style={styles.path}>{path.url}</div>
+        <div style={styles.path}>{route.url}</div>
     </div>
 }
 
