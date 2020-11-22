@@ -19,7 +19,7 @@ const styles = {
 const HttpIconText = ({route, theme}) => {
     return <div style={styles.row}>
         <div style={styles.icon} >
-            <HttpMethodIcon httpMethod={{text: route.op}} />
+            <HttpMethodIcon httpMethod={{text: route.operationKey}} />
         </div>
         <div style={styles.path}>{route.url}</div>
     </div>

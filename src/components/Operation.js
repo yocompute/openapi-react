@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import Parameter from './Parameter';
 import Response from './Response';
 import HttpIconText from './common/HttpIconText';
@@ -30,8 +30,10 @@ const styles = {
 };
 
 function Operation({ operation, route, theme }) {
+    const myRef = useRef();
+    
     return (
-        <div style={styles.block}>
+        <div ref={myRef} style={styles.block}>
             {
                 operation.summary &&
                 <div style={styles.summary}>{operation.summary}</div>
