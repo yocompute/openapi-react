@@ -1,6 +1,6 @@
 {
   "name": "openapi-react",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "description": "openapi, swagger document",
   "author": "zlkca",
   "license": "MIT",
@@ -54,5 +54,12 @@
   "files": [
     "dist"
   ],
-  "dependencies": {}
+  "dependencies": {},
+  "keywords": [
+    "swagger UI",
+    "openapi",
+    "redoc",
+    "swagger",
+    "restful"
+  ]
 }

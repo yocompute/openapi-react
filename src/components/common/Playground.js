@@ -77,7 +77,7 @@ const Playground = ({ route, operation, theme }) => {
         setParams(paramMap);
     }
 
-    const getPathParamValue = () => {
+    const getPathParam = () => {
         const ps = [];
         Object.keys(params).forEach(k => {
             if(params[k].in === 'path'){
@@ -85,10 +85,15 @@ const Playground = ({ route, operation, theme }) => {
             }
         })
         if(ps && ps.length >0){
-            return ps[0].value;
+            return {name: ps[0].name, val: ps[0].value};
         }else{
             return null;
         }
+    }
+
+    const getUrlWithPathParam = (url, param) => {
+        const t = `{${param.name}}`;
+        return url.replace(t, param.val);
     }
 
     const getQueryParamStr= () => {
@@ -110,8 +115,8 @@ const Playground = ({ route, operation, theme }) => {
         event.preventDefault();
         if(route && route.op){
             
-            const v = getPathParamValue();
-            const url = v ? `${route.schemes[0]}://${route.host}${route.basePath}${route.url}/${v}`:
+            const p = getPathParam();
+            const url = p ? `${route.schemes[0]}://${route.host}${route.basePath}${getUrlWithPathParam(route.url, p)}`:
             `${route.schemes[0]}://${route.host}${route.basePath}${route.url}`;
 
             const q = getQueryParamStr();
