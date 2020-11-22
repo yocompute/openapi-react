@@ -117,7 +117,7 @@ const Playground = ({ route, operation, theme }) => {
 
     const handleExecute = (event) => {
         event.preventDefault();
-        if(route && route.op){
+        if(route && route.operationKey){
             
             const p = getPathParam();
             const url = p ? `${route.schemes[0]}://${route.host}${route.basePath}${getUrlWithPathParam(route.url, p)}`:
@@ -128,7 +128,7 @@ const Playground = ({ route, operation, theme }) => {
 
             window.fetch(qUrl, {
                 mode:'cors',
-                method: route.op.toUpperCase(),
+                method: route.operationKey.toUpperCase(),
                 headers: {
                     'Content-Type': 'application/json'
                     // 'Content-Type': 'application/x-www-form-urlencoded',

@@ -1,5 +1,6 @@
 import React from 'react';
-import Paths from './Paths';
+// import Paths from './Paths';
+import Sections from './common/Sections';
 
 const { innerHeight } = window;
 
@@ -10,7 +11,7 @@ const styles = {
     float: 'left'
 };
 
-function Schema({spec, theme}){
+function Schema({spec, menuMap, theme}){
 
     const myStyle = theme && theme.body && theme.body.width ? {...styles, ...{width: theme.body.with}} 
         : (theme && theme.leftNav && theme.leftNav.width ? {...styles, ...{width: `calc(100% - ${theme.leftNav.width})`} } : styles);
@@ -18,11 +19,12 @@ function Schema({spec, theme}){
     
     return (
         <div style={myStyle}>
-            <Paths
-            paths={spec.paths} 
-            host={spec.host}
-            schemes={spec.schemes}
-            basePath={spec.basePath} />
+            <Sections
+                host={spec.host}
+                schemes={spec.schemes}
+                basePath={spec.basePath} 
+                menuMap={menuMap}
+            />
         </div>
     );
 }
