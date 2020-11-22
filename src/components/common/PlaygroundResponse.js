@@ -15,9 +15,13 @@ const PlaygroundResponse = ({rsp, theme}) => {
         icon: {
             float: 'left'
         },
-        textarea:{
-            width: '99.4%',
-            height: '280px'
+        response:{
+            width: '758px',
+            height: '280px',
+            border: '1px solid black',
+            overflowY: 'auto',
+            overflowX: 'auto',
+            padding: '10px'
         },
         status: {
             padding: '10px',
@@ -30,10 +34,9 @@ const PlaygroundResponse = ({rsp, theme}) => {
             rsp &&
             <div>
                 <div style={styles.status}>Code: {rsp.status}</div>
-                <textarea readOnly
-                    style={styles.textarea}
-                    value={rsp ? rsp.value : ''}
-                />
+                <pre style={styles.response}>
+                    {rsp ? JSON.stringify(rsp.value, undefined, 2) : ''}
+                </pre>
             </div>
         }
         {/* <div style={styles.icon} >
