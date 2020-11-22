@@ -38,6 +38,7 @@ const LeftNav = ({data, theme, onSelect}) => {
         const cloned = { ...menuMap };
         cloned[param].expanded = !cloned[param].expanded;
         SetMenuMap(cloned);
+        onSelect(cloned[param]);
     };
 
     const handleSelect = item => {
@@ -52,7 +53,7 @@ const LeftNav = ({data, theme, onSelect}) => {
                     menuMap[mk].expanded && menuMap[mk].items && menuMap[mk].items.length > 0 &&
                     menuMap[mk].items.map(it => <div 
                         style={styles.subMenuItem}
-                        key={it.operation + it.path}
+                        key={it.operationKey + it.path}
                         onClick={() => handleSelect(it)}>
                         {`${it.summary}`}
                         </div>)

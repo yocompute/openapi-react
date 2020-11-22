@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './styles.module.css';
+import React, { useRef, useState } from 'react';
+// import styles from './styles.module.css';
 import Schema from './components/Schema';
 import LeftNav from './layout/LeftNav';
 
@@ -7,10 +7,17 @@ export const OpenApi = ({ spec, theme }) => {
 
   const getMenuMap = spec => {
     const pathKeys = Object.keys(spec.paths);
-    const menuMap = {};
+    const mMap = {};
     
     spec.tags.forEach(tag => {
-      menuMap[tag.name] = {name: tag.name, items: [], expanded: true};
+      mMap[tag.name] = {
+        name: tag.name,
+        description: tag.description,
+        pathMap: {},
+        items: [], // menu items
+        expanded: true,
+        ref: useRef(tag.name)
+      };
     });
 
     pathKeys.forEach(pk => {
@@ -19,38 +26,45 @@ export const OpenApi = ({ spec, theme }) => {
       operationKeys.forEach(opk => {
         const operation = pathItem[opk];
         operation.tags.forEach(tagName => {
-          menuMap[tagName].items.push({
+          
+          mMap[tagName].pathMap[pk] = pathItem;
+
+          mMap[tagName].items.push({
             type:'path',
             summary: operation.summary,
-            operation: opk,
-            path: pk
+            operationKey: opk,
+            operation,
+            path: pk,
+            ref: useRef(`${opk}_${pk}`)
           });
         });
-
       });
     });
 
-    return menuMap;
+    return mMap;
   };
 
-  /**
-   * 
-   * @param {type, summary, operation, path} item 
-   */
-  const handleSelect = item => {
-    // jump to menuMap
+
+  const [menuMap, setMenuMap] = useState(getMenuMap(spec));
+
+  // item --- item in menuMap or submenu
+  const handleSelect = menu => {
+    if(menu.ref){
+      menu.ref.current.scrollIntoView();
+    }
   };
 
   return (
 
     <div style={{height: '100%'}}>
       <LeftNav 
-        data={getMenuMap(spec)}
+        data={menuMap}
         theme={theme && theme.layout ? theme.layout: {}}
         onSelect={handleSelect}
       />
       <Schema 
         spec={spec}
+        menuMap={menuMap}
         theme={theme && theme.layout ? theme.layout: {}}
       />
     </div>

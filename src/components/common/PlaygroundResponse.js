@@ -1,9 +1,5 @@
 import React from 'react'
-import HttpMethodIcon from './HttpMethodIcon'
 
-
-
-// path { op, url }
 const PlaygroundResponse = ({rsp, theme}) => {
 
     const styles = {
