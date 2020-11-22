@@ -42,7 +42,11 @@ const Playground = ({ route, operation, theme }) => {
     const getParams = () => {
         const ps = {};
         operation.parameters.forEach(p => {
-            ps[p.name] = {...p, value:''};
+            if(p.type === "array"){
+                ps[p.name] = {...p, value: p.items.default};
+            }else{
+                ps[p.name] = {...p, value:''};
+            }
         });
         return ps;
     }
@@ -135,8 +139,8 @@ const Playground = ({ route, operation, theme }) => {
                 // body: JSON.stringify(data) // body data type must match "Content-Type" header
             })
             .then( r => { //rsp => rsp.json())
-                r.text().then( d => {
-                setResponse({status: r.status, statusText: r.statusText, value: d});
+                r.json().then( d => {
+                    setResponse({status: r.status, statusText: r.statusText, value: d});
                 // setMode('try');
                 });
             }).catch(e => {
