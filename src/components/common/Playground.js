@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import HttpIconText from './HttpIconText'
 import PlaygroundResponse from './PlaygroundResponse'
+import List from './List'
 
 const styles = {
     param: {
@@ -24,6 +25,15 @@ const styles = {
         padding: '15px',
         backgroundColor: '#555',
         color: 'white'
+    },
+    required: {
+        fontSize: '13px',
+        color: 'red',
+        lineHeight: '20px',
+        paddingLeft: '5px'
+    },
+    paramType:{
+        paddingLeft: '5px'
     }
 }
 
@@ -40,12 +50,23 @@ const Playground = ({ route, operation, theme }) => {
     const [mode, setMode] = useState('view');
     const [params, setParams] = useState(getParams());
     const [rsp, setResponse] = useState();
+
     const handleTry = () => {
         setMode('try');
     }
 
+    const getParamType = (param) => {
+        return param.type === "array" ? `${param.type}[${param.items.type}]` : param.type;
+    }
+
     const handleCancel = () => {
         setMode('view');
+    }
+
+    const handleSelectParam = (name, value) => {
+        const paramMap = {...params};
+        paramMap[name].value = value;
+        setParams(paramMap);
     }
 
     const handleParamChange = (event) => {
@@ -133,13 +154,29 @@ const Playground = ({ route, operation, theme }) => {
                 <div style={styles.params}>
                     {
                         operation.parameters.map(p => <div key={p.name} style={styles.param}>
-                            <div>{p.name}</div>
-                            <input
+                            <div>
+                                {p.name}
+                                <span style={styles.paramType}>{getParamType(p)}</span>
+                                {
+                                    p.required &&
+                                    <span style={styles.required}> *required</span>
+                                }
+                            </div>
+                            {
+                                p.type === 'array' ?
+                                <List
+                                    name={p.name} 
+                                    items={p.items}
+                                    onSelect={handleSelectParam}
+                                />
+                                :
+                                <input
                                 data-param={p.name}
                                 style={styles.input}
                                 placeholder={p.description}
                                 onChange={handleParamChange}
-                            />
+                                />
+                            }
                         </div>)
                     }
                 </div>
