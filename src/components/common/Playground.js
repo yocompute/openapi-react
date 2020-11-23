@@ -35,6 +35,9 @@ const styles = {
     },
     paramType:{
         paddingLeft: '5px'
+    },
+    paramName:{
+        paddingLeft: '5px'
     }
 }
 
@@ -173,14 +176,7 @@ const Playground = ({ route, operation, definitionMap, theme }) => {
 
 
     const renderParam = (p) => {
-
-        if( p.in === 'array' ){
-            return <List
-                name={p.name} 
-                items={p.items}
-                onSelect={handleSelectParam}
-            />
-        }else if(p.in === 'body'){
+        if(p.in === 'body'){
             return <BodyParam
                 val={params[p.name].value} 
                 param={p}
@@ -188,6 +184,12 @@ const Playground = ({ route, operation, definitionMap, theme }) => {
                 onChange={handleBodyChange}
                 />
             
+        } else if( p.type === 'array' ){
+            return <List
+                name={p.name} 
+                items={p.items}
+                onSelect={handleSelectParam}
+            />
         }else{
             return <input
                 data-param={p.name}
@@ -247,6 +249,7 @@ const Playground = ({ route, operation, definitionMap, theme }) => {
                 <button onClick={handleTry} style={styles.btn} >Try it out</button>
             }
         </div>
+
         <form>
             {
                 operation.parameters && operation.parameters.length > 0 &&
@@ -254,7 +257,8 @@ const Playground = ({ route, operation, definitionMap, theme }) => {
                     {
                         operation.parameters.map(p => <div key={p.name} style={styles.param}>
                             <div>
-                                {p.name}
+                                <span>{`(${p.in})`}</span>
+                                <span style={styles.paramName}>{p.name}</span>
                                 <span style={styles.paramType}>{getParamType(p)}</span>
                                 {
                                     p.required &&
