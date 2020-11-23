@@ -20,10 +20,9 @@ function Schema({spec, menuMap, theme}){
     return (
         <div style={myStyle}>
             <Sections
-                host={spec.host}
-                schemes={spec.schemes}
-                basePath={spec.basePath} 
                 menuMap={menuMap}
+                route={{host: spec.host, schemes: spec.schemes, basePath: spec.basePath}} 
+                definitionMap={spec.definitions}
             />
         </div>
     );

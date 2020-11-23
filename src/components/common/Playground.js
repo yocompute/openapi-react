@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import HttpIconText from './HttpIconText'
 import PlaygroundResponse from './PlaygroundResponse'
 import List from './List'
+import BodyParam from './BodyParam'
 
 const styles = {
     param: {
@@ -38,13 +39,47 @@ const styles = {
 }
 
 // route { op, url, host, schemes }
-const Playground = ({ route, operation, theme }) => {
+const Playground = ({ route, operation, definitionMap, theme }) => {
+    const getParamShema = (param) => {
+        const s = param.schema.$ref;
+        if(s){
+            const name = s.replace('#/definitions/', '');
+            return definitionMap[name];
+        }else{
+            return null;
+        }
+    }
+    const getDefaultBody = (param) => {
+        const d = getParamShema(param);
+        if(d && d.type === 'object'){
+            const obj = {};
+            Object.keys(d.properties).forEach(pk => {
+                if(d.properties[pk].type === 'integer'){
+                    obj[pk] = 0;
+                }else if(d.properties[pk].type === 'string'){
+                    obj[pk] = 'string';
+                }else if(d.properties[pk].type === 'boolean'){
+                    obj[pk] = false;
+                }else if(d.properties[pk].type === 'array'){
+                    obj[pk] = [];
+                }else{
+
+                }
+            });
+            return obj;
+        }else{
+            return '';
+        }
+    }
+
     const getParams = () => {
         const ps = {};
         operation.parameters.forEach(p => {
-            if(p.type === "array"){
+            if(p.in === "array"){
                 ps[p.name] = {...p, value: p.items.default};
-            }else{
+            }else if(p.in === "body"){
+                ps[p.name] = {...p, value: getDefaultBody(p)}
+            }else{    
                 ps[p.name] = {...p, value:''};
             }
         });
@@ -65,6 +100,12 @@ const Playground = ({ route, operation, theme }) => {
 
     const handleCancel = () => {
         setMode('view');
+    }
+
+    const handleBodyChange = (name, val) => {
+        const paramMap = {...params};
+        paramMap[name].value = val ? JSON.parse(val) : null;
+        setParams(paramMap);
     }
 
     const handleSelectParam = (name, value) => {
@@ -95,6 +136,20 @@ const Playground = ({ route, operation, theme }) => {
         }
     }
 
+    const getBodyParma = () => {
+        const ps = [];
+        Object.keys(params).forEach(k => {
+            if(params[k].in === 'body'){
+                ps.push(params[k]);
+            }
+        })
+        if(ps && ps.length >0){
+            return ps[0].value;
+        }else{
+            return null;
+        }
+    }
+
     const getUrlWithPathParam = (url, param) => {
         const t = `{${param.name}}`;
         return url.replace(t, param.val);
@@ -115,6 +170,34 @@ const Playground = ({ route, operation, theme }) => {
         }
     }
 
+
+
+    const renderParam = (p) => {
+
+        if( p.in === 'array' ){
+            return <List
+                name={p.name} 
+                items={p.items}
+                onSelect={handleSelectParam}
+            />
+        }else if(p.in === 'body'){
+            return <BodyParam
+                val={params[p.name].value} 
+                param={p}
+                schema={getParamShema(p)}
+                onChange={handleBodyChange}
+                />
+            
+        }else{
+            return <input
+                data-param={p.name}
+                style={styles.input}
+                placeholder={p.description}
+                onChange={handleParamChange}
+            />
+        }
+    }
+
     const handleExecute = (event) => {
         event.preventDefault();
         if(route && route.operationKey){
@@ -126,7 +209,7 @@ const Playground = ({ route, operation, theme }) => {
             const q = getQueryParamStr();
             const qUrl = q ? `${url}?${q}` : url; 
 
-            window.fetch(qUrl, {
+            const option = {
                 mode:'cors',
                 method: route.operationKey.toUpperCase(),
                 headers: {
@@ -137,7 +220,13 @@ const Playground = ({ route, operation, theme }) => {
                 // redirect: 'follow', // manual, *follow, error
                 // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
                 // body: JSON.stringify(data) // body data type must match "Content-Type" header
-            })
+            }
+
+            const opt = route.operationKey.toUpperCase() === 'POST' ?
+                {...option, body: getBodyParma()}
+                : option;
+
+            window.fetch(qUrl, opt)
             .then( r => { //rsp => rsp.json())
                 r.json().then( d => {
                     setResponse({status: r.status, statusText: r.statusText, value: d});
@@ -148,6 +237,7 @@ const Playground = ({ route, operation, theme }) => {
             })
         }
     }
+
     return <div style={styles.container}>
         <HttpIconText route={route} />
 
@@ -172,19 +262,25 @@ const Playground = ({ route, operation, theme }) => {
                                 }
                             </div>
                             {
-                                p.type === 'array' ?
-                                <List
-                                    name={p.name} 
-                                    items={p.items}
-                                    onSelect={handleSelectParam}
-                                />
-                                :
-                                <input
-                                data-param={p.name}
-                                style={styles.input}
-                                placeholder={p.description}
-                                onChange={handleParamChange}
-                                />
+                                renderParam(p)
+                                // p.type === 'array' ?
+                                // <List
+                                //     name={p.name} 
+                                //     items={p.items}
+                                //     onSelect={handleSelectParam}
+                                // />
+                                // :
+                                // (p.type === 'body' ?
+
+                                // <BodyParam param={p} onChange={handleBodyChange}/>
+                                // :
+                                // <input
+                                // data-param={p.name}
+                                // style={styles.input}
+                                // placeholder={p.description}
+                                // onChange={handleParamChange}
+                                // />
+                                // )
                             }
                         </div>)
                     }

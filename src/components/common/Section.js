@@ -1,7 +1,7 @@
 import React from 'react';
 import Paths from '../Paths';
 
-function Section({menu, route}) {
+function Section({menu, route, definitionMap}) {
     const styles = {
         name: {
             fontSize: '26px',
@@ -18,10 +18,9 @@ function Section({menu, route}) {
             <div style={styles.description}>{menu.description}</div>
             <Paths
                 paths={menu.pathMap}
-                host={route.host}
-                schemes={route.schemes}
-                basePath={route.basePath}
+                route={route}
                 menuItems={menu.items}
+                definitionMap={definitionMap}
             />
         </div>
     );

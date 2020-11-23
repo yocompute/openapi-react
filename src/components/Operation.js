@@ -29,7 +29,7 @@ const styles = {
     },
 };
 
-function Operation({ operation, route, theme }) {
+function Operation({ operation, route, definitionMap, theme }) {
     const myRef = useRef();
     
     return (
@@ -66,7 +66,7 @@ function Operation({ operation, route, theme }) {
                     }
                 </div>
             }
-            <Playground route={route} operation={operation}/>
+            <Playground route={route} operation={operation} definitionMap={definitionMap}/>
         </div>
     );
 }
