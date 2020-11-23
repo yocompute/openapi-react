@@ -1,7 +1,7 @@
 import React from 'react';
 import Operation from './Operation';
 
-function PathItem({pathItem, route, menuItems}) {
+function PathItem({pathItem, route, menuItems, definitionMap}) {
     const operations = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch'];
 
     const getRef = (opk) => {
@@ -16,7 +16,11 @@ function PathItem({pathItem, route, menuItems}) {
                     <div key={operationKey} ref={getRef(operationKey)}>
                         {
                             pathItem[operationKey] &&
-                            <Operation operation={pathItem[operationKey]} route={ {...route, operationKey} }/>
+                            <Operation 
+                                operation={pathItem[operationKey]}
+                                route={ {...route, operationKey} }
+                                definitionMap={definitionMap}
+                            />
 
                         }
                     </div>

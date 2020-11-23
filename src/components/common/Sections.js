@@ -1,7 +1,7 @@
 import React from 'react';
 import Section from './Section';
 
-function Sections({ menuMap, host, schemes, basePath }) {
+function Sections({ menuMap, route, definitionMap}) {
 
     return (
         <div>
@@ -10,7 +10,7 @@ function Sections({ menuMap, host, schemes, basePath }) {
                     <div key={k}>
                         {
                             menuMap[k].items && menuMap[k].items.length > 0 &&
-                            <Section menu={menuMap[k]} route={{host, schemes, basePath}}/>
+                            <Section menu={menuMap[k]} route={route} definitionMap={definitionMap}/>
                         }
                     </div>
                 )
