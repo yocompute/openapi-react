@@ -9,7 +9,7 @@ const styles = {
 function Response({rsp, theme}) {
     return (
         <div>
-            Response
+            {/* Response */}
         </div>
     );
 }

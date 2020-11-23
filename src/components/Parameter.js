@@ -9,7 +9,7 @@ const styles = {
 function Parameter({param, theme}) {
     return (
         <div>
-            Parameter
+            {/* Parameter */}
         </div>
     );
 }
