@@ -3,13 +3,14 @@ import Parameter from './Parameter';
 import Response from './Response';
 import HttpIconText from './common/HttpIconText';
 import Playground from './common/Playground';
+import Parameters from './Parameters';
 
 const styles = {
     block: {
         padding: '10px'
     },
     summary: {
-        fontSize: '20px'
+        fontSize: '24px'
     },
     description: {
         color: '#333',
@@ -49,15 +50,15 @@ function Operation({ operation, route, definitionMap, theme }) {
                     <HttpIconText route={route} />
                 </div>
             }
-            {
+            {/* {
                 operation.parameters && operation.parameters.length > 0 &&
                 <div style={styles.params}>
                     {
                         operation.parameters.map(p => <Parameter key={p.name} param={p} />)
                     }
                 </div>
-            }
-
+            } */}
+            <Parameters route={route} operation={operation} definitionMap={definitionMap} />
             {
                 operation.responses &&
                 <div style={styles.responses}>
