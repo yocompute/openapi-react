@@ -1,16 +1,20 @@
 import React from 'react'
 
-const styles = {
-    textarea:{
-        width: '480px',
-        height: '180px',
-        padding: '10px'
-    }
-}
+
 
 // path { op, url }
-const BodyParam = ({param, schema, onChange, val, theme}) => {
-
+const BodyParam = ({param, schema, onChange, val, isMobile, theme}) => {
+    const styles = {
+        row: {
+            width: '100%'
+        },
+        textarea:{
+            width: isMobile ? '100%' : '480px',
+            height: '180px',
+            padding: '10px',
+            boxSizing : 'border-box'
+        }
+    }
     const handleChange = (event) => {
         const { param } = event.target.dataset;
         // setParams(paramMap);

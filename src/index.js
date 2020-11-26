@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 // import styles from './styles.module.css';
 import Schema from './components/Schema';
 import LeftNav from './layout/LeftNav';
@@ -47,6 +47,17 @@ export const OpenApi = ({ spec, theme }) => {
 
   const [menuMap, setMenuMap] = useState(getMenuMap(spec));
 
+  const [width, setWidth] = React.useState(window.innerWidth);
+  const breakpoint = 767;
+
+  useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth)
+    window.addEventListener("resize", handleWindowResize);
+
+    // Return a function from the effect that removes the event listener
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
   // item --- item in menuMap or submenu
   const handleSelect = menu => {
     if(menu.ref){
@@ -57,15 +68,19 @@ export const OpenApi = ({ spec, theme }) => {
   return (
 
     <div style={{height: '100%'}}>
-      <LeftNav 
-        data={menuMap}
-        theme={theme && theme.layout ? theme.layout: {}}
-        onSelect={handleSelect}
-      />
+      {
+        width > breakpoint &&
+        <LeftNav 
+          data={menuMap}
+          theme={theme && theme.layout ? theme.layout: {}}
+          onSelect={handleSelect}
+        />
+      }
       <Schema 
         spec={spec}
         menuMap={menuMap}
         theme={theme && theme.layout ? theme.layout: {}}
+        isMobile={width <= breakpoint}
       />
     </div>
   );
