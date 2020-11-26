@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import HttpIconText from './HttpIconText'
 import PlaygroundResponse from './PlaygroundResponse'
 import List from './List'
@@ -41,8 +41,31 @@ const styles = {
     }
 }
 
+const mobileStyle = {
+    container: {
+        // width: '100%',
+        padding: '15px',
+        backgroundColor: '#555',
+        color: 'white'
+    },
+    input: {
+        width: '100%'
+    },
+}
+
 // route { op, url, host, schemes }
 const Playground = ({ route, operation, definitionMap, theme }) => {
+    const [width, setWidth] = React.useState(window.innerWidth);
+    const breakpoint = 767;
+  
+    useEffect(() => {
+      const handleWindowResize = () => setWidth(window.innerWidth)
+      window.addEventListener("resize", handleWindowResize);
+  
+      // Return a function from the effect that removes the event listener
+      return () => window.removeEventListener("resize", handleWindowResize);
+    }, []);
+
     const getParamShema = (param) => {
         const s = param.schema.$ref;
         if(s){
@@ -175,9 +198,10 @@ const Playground = ({ route, operation, definitionMap, theme }) => {
 
 
 
-    const renderParam = (p) => {
+    const renderParam = (p, isMobile) => {
         if(p.in === 'body'){
             return <BodyParam
+                isMobile={isMobile}
                 val={params[p.name].value} 
                 param={p}
                 schema={getParamShema(p)}
@@ -193,7 +217,7 @@ const Playground = ({ route, operation, definitionMap, theme }) => {
         }else{
             return <input
                 data-param={p.name}
-                style={styles.input}
+                style={isMobile ? mobileStyle.input : styles.input}
                 placeholder={p.description}
                 onChange={handleParamChange}
             />
@@ -240,7 +264,7 @@ const Playground = ({ route, operation, definitionMap, theme }) => {
         }
     }
 
-    return <div style={styles.container}>
+    return <div style={width <= breakpoint ? mobileStyle.container : styles.container}>
         <HttpIconText route={route} />
 
         <div style={styles.btnRow}>
@@ -266,7 +290,7 @@ const Playground = ({ route, operation, definitionMap, theme }) => {
                                 }
                             </div>
                             {
-                                renderParam(p)
+                                renderParam(p, width <= breakpoint)
                                 // p.type === 'array' ?
                                 // <List
                                 //     name={p.name} 
