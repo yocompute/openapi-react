@@ -4,17 +4,17 @@ import Sections from './common/Sections';
 
 const { innerHeight } = window;
 
-const styles = {
-    width: 'calc(100% - 260px)',
-    height: innerHeight,
-    overflowY: 'scroll',
-    float: 'left'
-};
+function Schema({spec, menuMap, theme, isMobile}){
 
-function Schema({spec, menuMap, theme}){
+    const styles = {
+        width: isMobile? '100%' : 'calc(100% - 260px)',
+        height: innerHeight,
+        overflowY: 'scroll',
+        float: 'left'
+    };
 
     const myStyle = theme && theme.body && theme.body.width ? {...styles, ...{width: theme.body.with}} 
-        : (theme && theme.leftNav && theme.leftNav.width ? {...styles, ...{width: `calc(100% - ${theme.leftNav.width})`} } : styles);
+        : (!isMobile && theme && theme.leftNav && theme.leftNav.width ? {...styles, ...{width: `calc(100% - ${theme.leftNav.width})`} } : styles);
 
     
     return (
