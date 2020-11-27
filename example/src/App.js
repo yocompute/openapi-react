@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { OpenApi } from 'openapi-react'
-import 'openapi-react/dist/index.css'
+// import 'openapi-react/dist/index.css'
 
 const App = () => {
   const spec =
