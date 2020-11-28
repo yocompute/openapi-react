@@ -58,10 +58,17 @@ MIT © [zlkca](https://github.com/zlkca)
 
 
 #### run example
+
+Firstly, build library:
 ```bash
 git clone https://github.com/yocompute/openapi-react.git
 cd openapi-react
+npm i
 npm run build
+```
+
+Then, you can go into example folder to try the lib:
+```
 cd example
 npm i
 npm start

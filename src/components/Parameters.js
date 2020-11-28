@@ -16,7 +16,7 @@ const styles = {
         float: 'right',
     },
     input: {
-        width: '600px'
+        width: '100%'
     },
     container: {
         width: '780px',

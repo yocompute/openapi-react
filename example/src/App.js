@@ -11,7 +11,7 @@ const App = () => {
   const theme = {
     layout:{
       leftNav: {
-        width: '320px' // only support px for now
+        width: '360px' // only support px for now
       },
       // body: {
       //   width: '300px' // support any

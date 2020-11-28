@@ -1,6 +1,6 @@
 import React from 'react';
 // import Paths from './Paths';
-import Sections from './common/Sections';
+import Sections from '../layout/Sections';
 
 const { innerHeight } = window;
 
