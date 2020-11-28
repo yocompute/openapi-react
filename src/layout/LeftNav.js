@@ -1,37 +1,48 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const { innerHeight } = window;
 
 const styles = {
-    leftNav:{
-        width: '260px',
+    leftNav: {
+        width: '360px',
         height: innerHeight,
-        // overflowY: 'scroll',
         float: 'left',
+        backgroundColor: '#eee'
     },
 
-    menuItem:{
+    menuItem: {
         height: '20px',
         padding: '10px',
         fontSize: '18px',
-        ':hover': {
-            backgroundColor: '#eee',
-        },   
     },
-
     subMenuItem: {
-        // height: '18px',
         padding: '8px',
         paddingLeft: '20px',
         fontSize: '14px'
-    }
+    },
+    hovered: {
+        padding: '8px',
+        paddingLeft: '20px',
+        fontSize: '14px',
+        backgroundColor: '#ccc',
+    },
 };
 
-const LeftNav = ({data, theme, onSelect}) => {
+const LeftNav = ({ data, theme, onSelect }) => {
 
     const [menuMap, SetMenuMap] = useState(data);
-    const leftNavStyle = {...styles.leftNav, ...theme.leftNav};
+    const [hover, setHover] = useState({});
+    const leftNavStyle = { ...styles.leftNav, ...theme.leftNav };
 
+    const handleMouseEnter = (it) => {
+        const h = { [it.operationKey + it.path]: true };
+        setHover(h);
+    }
+
+    const handleMouseLeave = (it) => {
+        const h = { [it.operationKey + it.path]: false };
+        setHover(h);
+    }
 
     const handleClick = e => {
         const { param } = e.target.dataset;
@@ -51,12 +62,17 @@ const LeftNav = ({data, theme, onSelect}) => {
                 <div style={styles.menuItem} data-param={mk} onClick={handleClick}>{mk}</div>
                 {
                     menuMap[mk].expanded && menuMap[mk].items && menuMap[mk].items.length > 0 &&
-                    menuMap[mk].items.map(it => <div 
-                        style={styles.subMenuItem}
+                    menuMap[mk].items.map(it => <div
+                        style={
+                            hover[it.operationKey + it.path]? styles.hovered : styles.subMenuItem
+                        }
                         key={it.operationKey + it.path}
-                        onClick={() => handleSelect(it)}>
+                        onClick={() => handleSelect(it)}
+                        onMouseEnter={() => handleMouseEnter(it)} // Or onMouseOver
+                        onMouseLeave={() => handleMouseLeave(it)}
+                        >
                         {`${it.summary}`}
-                        </div>)
+                    </div>)
                 }
             </div>)
         }

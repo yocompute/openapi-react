@@ -12,7 +12,6 @@ const PlaygroundResponse = ({rsp, theme}) => {
             float: 'left'
         },
         response:{
-            width: '758px',
             height: '280px',
             border: '1px solid black',
             overflowY: 'auto',

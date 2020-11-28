@@ -1,5 +1,5 @@
 import React from 'react';
-import Section from './Section';
+import Section from '../components/common/Section';
 
 function Sections({ menuMap, route, definitionMap}) {
 

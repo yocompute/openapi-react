@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import Parameter from './Parameter';
 import Response from './Response';
 import HttpIconText from './common/HttpIconText';
@@ -7,34 +7,84 @@ import Parameters from './Parameters';
 
 const styles = {
     block: {
-        padding: '10px'
+        // padding: "10px"
+        display: "flex",
+        alignItems: "stretch",
     },
+      
     summary: {
-        fontSize: '24px'
+        fontSize: "24px"
     },
-    description: {
-        color: '#333',
-        padding: '5px 0px'
+      
+      description: {
+        color: "#333",
+        padding: "5px 0px"
+      },
+      
+      path: {
+        color: "#333",
+        padding: "5px 0px"
+      },
+      
+      params: {
+        color: "#333",
+        padding: "5px 0px"
+      },
+      
+      responses: {
+        color: "#333",
+        padding: "5px 0px"
+      },
+      
+      content: {
+        width: "calc(100% - 500px)",
+        alignSelf: "stretch",
+        borderBottom: '1px solid #eee'
+      },
+      
+      playground: {
+        width: "500px",
+        alignSelf: "stretch",
+        backgroundColor: "rgb(85,85,85)"
+      },
+
+      operationContent:{
+        padding: '20px 15px'
+      }
+
+}
+
+const mobileStyles = {
+    block: {
+        display: "block",
     },
-    path: {
-        color: '#333',
-        padding: '5px 0px'
+
+    content:{
+        width: "100%",
     },
-    params: {
-        color: '#333',
-        padding: '5px 0px'
-    },
-    responses: {
-        color: '#333',
-        padding: '5px 0px'
-    },
-};
+    
+    playground: {
+        width: "100%"
+    }
+}
 
 function Operation({ operation, route, definitionMap, theme }) {
     const myRef = useRef();
+    const [width, setWidth] = useState(window.innerWidth);
+    const breakpoint = 767;
+  
+    useEffect(() => {
+        const handleWindowResize = () => setWidth(window.innerWidth)
+        window.addEventListener("resize", handleWindowResize);
     
+        // Return a function from the effect that removes the event listener
+        return () => window.removeEventListener("resize", handleWindowResize);
+    }, []);
+
     return (
-        <div ref={myRef} style={styles.block}>
+        <div ref={myRef} style={width <= breakpoint ? mobileStyles.block : styles.block}>
+            <div style={width <= breakpoint ? mobileStyles.content : styles.content}>
+                <div style={styles.operationContent}>
             {
                 operation.summary &&
                 <div style={styles.summary}>{operation.summary}</div>
@@ -50,14 +100,7 @@ function Operation({ operation, route, definitionMap, theme }) {
                     <HttpIconText route={route} />
                 </div>
             }
-            {/* {
-                operation.parameters && operation.parameters.length > 0 &&
-                <div style={styles.params}>
-                    {
-                        operation.parameters.map(p => <Parameter key={p.name} param={p} />)
-                    }
-                </div>
-            } */}
+
             <Parameters route={route} operation={operation} definitionMap={definitionMap} />
             {
                 operation.responses &&
@@ -67,7 +110,12 @@ function Operation({ operation, route, definitionMap, theme }) {
                     }
                 </div>
             }
-            <Playground route={route} operation={operation} definitionMap={definitionMap}/>
+            </div>
+            </div>
+            <div style={width <= breakpoint ? mobileStyles.playground : styles.playground}>
+                <Playground route={route} operation={operation} definitionMap={definitionMap}
+                    isMobile={width <= breakpoint} />
+            </div>
         </div>
     );
 }
