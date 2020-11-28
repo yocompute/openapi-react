@@ -5,7 +5,7 @@ function Section({menu, route, definitionMap}) {
     const styles = {
         name: {
             fontSize: '26px',
-            padding: '10px 0px'
+            padding: '10px'
         },
         description: {
             color: '#333',

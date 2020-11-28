@@ -9,7 +9,7 @@ const BodyParam = ({param, schema, onChange, val, isMobile, theme}) => {
             width: '100%'
         },
         textarea:{
-            width: isMobile ? '100%' : '480px',
+            width: '100%', // isMobile ? '100%' : '480px',
             height: '180px',
             padding: '10px',
             boxSizing : 'border-box'
