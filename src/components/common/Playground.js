@@ -3,6 +3,7 @@ import HttpIconText from './HttpIconText'
 import PlaygroundResponse from './PlaygroundResponse'
 import List from './List'
 import BodyParam from './BodyParam'
+import Curl from './Curl'
 
 const styles = {
     param: {
@@ -307,11 +308,14 @@ const Playground = ({ route, operation, definitionMap, isMobile, theme }) => {
                 </div>
             }
         </form>
-            {
+            {   
                 mode === 'try' && rsp &&
-                <div style={styles.response}>
-                    <div>Server Response:</div>
-                    <PlaygroundResponse rsp={rsp} />
+                <div>
+                    <div><Curl route={route} operation={operation} rsp={rsp} /></div>
+                    <div style={styles.response}>
+                        <div>Server Response:</div>
+                        <PlaygroundResponse rsp={rsp} />
+                    </div>
                 </div>
             }
     </div>
