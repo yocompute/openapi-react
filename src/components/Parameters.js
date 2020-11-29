@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Parameter from './Parameter';
 // import HttpIconText from './HttpIconText'
 // import PlaygroundResponse from './PlaygroundResponse'
 // import List from './List'
@@ -110,7 +111,11 @@ const Parameters = ({ route, operation, definitionMap, theme }) => {
     }
 
     const getParamType = (param) => {
-        return param.type === "array" ? `${param.type}[${param.items.type}]` : param.type;
+        if(param.type){
+            return param.type === "array" ? `${param.type}[${param.items.type}]` : param.type;
+        }else{
+            return 'object'
+        }
     }
 
     const handleCancel = () => {
@@ -241,16 +246,17 @@ const Parameters = ({ route, operation, definitionMap, theme }) => {
                 {
                     grpMap[k].length > 0 &&
                     <div style={styles.group}>
-                        <div style={styles.in}>{`${k} parameters:`}</div>
+                        <div style={styles.k}>{`${k} parameters:`}</div>
                         {
                             grpMap[k].map(p => <div key={p.name} style={styles.param}>
-                                <span style={styles.paramName}>{p.name}</span>
+                                <Parameter param={p} definitionMap={definitionMap} />
+                                {/* <span style={styles.paramName}>{p.name}</span>
                                 <span style={styles.paramType}>{`[${getParamType(p)}]`}</span>
                                 {
                                     p.required &&
                                     <span style={styles.required}> *required</span>
                                 }
-                                <span style={styles.description}>{p.description}</span>
+                                <span style={styles.description}>{p.description}</span> */}
                             </div>
                             )
                         }

@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-// import styles from './styles.module.css';
-import Schema from './components/Schema';
+import Content from './layout/Content';
 import LeftNav from './layout/LeftNav';
 
 export const OpenApi = ({ spec, theme }) => {
@@ -76,7 +75,7 @@ export const OpenApi = ({ spec, theme }) => {
           onSelect={handleSelect}
         />
       }
-      <Schema 
+      <Content 
         spec={spec}
         menuMap={menuMap}
         theme={theme && theme.layout ? theme.layout: {}}
