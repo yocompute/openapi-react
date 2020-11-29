@@ -1,29 +1,75 @@
-import React from 'react';
-// import Paths from './Paths';
-import Sections from '../layout/Sections';
+import React, { useEffect, useState } from 'react';
 
-const { innerHeight } = window;
+const styles = {
+    wrapper:{
+        padding: '3px 20px',
+        fontSize: '14px',
+        color: '#222'
+    },
+    properties: {
+        padding: '5px 15px'
+    },
+    property:{
+        padding: '3px 0px'
+    }
+};
+// const mobileStyle = {
 
-function Schema({spec, menuMap, theme, isMobile}){
+// }
+function Schema({ name, definitionMap }) {
 
-    const styles = {
-        width: isMobile? '100%' : 'calc(100% - 260px)',
-        height: innerHeight,
-        overflowY: 'scroll',
-        float: 'left'
-    };
+    const [schema, setSchema] = useState();
 
-    const myStyle = theme && theme.body && theme.body.width ? {...styles, ...{width: theme.body.with}} 
-        : (!isMobile && theme && theme.leftNav && theme.leftNav.width ? {...styles, ...{width: `calc(100% - ${theme.leftNav.width})`} } : styles);
+    useEffect(() => {
+        if (name && definitionMap[name]) {
+            setSchema(definitionMap[name]);
+        }
+    }, []);
 
-    
+    const getSchemaName = (ref) => {
+        if (ref) {
+            return ref.replace('#/definitions/', '')
+        } else {
+            return null;
+        }
+    }
+
+    const isRequired = () => {
+
+    }
+
+
     return (
-        <div style={myStyle}>
-            <Sections
-                menuMap={menuMap}
-                route={{host: spec.host, schemes: spec.schemes, basePath: spec.basePath}} 
-                definitionMap={spec.definitions}
-            />
+        <div style={styles.wrapper}>
+            {
+                schema &&
+                <div>{name}</div>
+            }
+            {
+                schema && schema.properties &&
+                <div style={styles.properties}>
+                    {
+                        Object.keys(schema.properties).map(k => <div key={k} >
+                            {
+                                schema.properties[k].$ref ?
+                                    <Schema
+                                        name={getSchemaName(schema.properties[k].$ref)}
+                                        definitionMap={definitionMap}
+                                    />
+                                    :
+                                    <div style={styles.property}>
+                                        <div>{`${k} [${schema.properties[k].type}]`}</div>
+                                        {
+                                            schema.properties[k].description &&
+                                            <div>{schema.properties[k].description}</div>
+                                        }
+                                    </div>
+                            }
+                        </div>
+                        )
+                    }
+                </div>
+            }
         </div>
     );
 }
