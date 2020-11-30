@@ -28,9 +28,8 @@ const styles = {
     },
 };
 
-const LeftNav = ({ data, theme, onSelect }) => {
-
-    const [menuMap, SetMenuMap] = useState(data);
+const LeftNav = ({ menuMap, theme, onSelect }) => {
+    
     const [hover, setHover] = useState({});
     const leftNavStyle = { ...styles.leftNav, ...theme.leftNav };
 
