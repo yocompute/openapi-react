@@ -50,13 +50,13 @@ import React, { Component } from 'react'
 
 import OpenApi from 'openapi-react'
 
-  const theme = {
-    layout:{
-      leftNav: {
-        width: '320px'
-      }
+const theme = {
+  layout:{
+    leftNav: {
+      width: '320px'
     }
   }
+}
 
 class Example extends Component {
   render() {
