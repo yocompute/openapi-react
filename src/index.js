@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './layout/Layout';
+import styles from './styles.module.css'
 
 export const OpenApi = ({ url, spec, theme }) => {
 
   const [swagger, setSwagger] = useState();
   const [width, setWidth] = useState(window.innerWidth);
+  const [loading, setLoading] = useState(true);
   const breakpoint = 767;
 
   useEffect(() => {
@@ -13,11 +15,11 @@ export const OpenApi = ({ url, spec, theme }) => {
         .then(d => d.json())
         .then(t => {
           setSwagger(t);
-          // setMenuMap(getMenuMap(t));
+          setLoading(false);
         })
     } else if(spec){
       setSwagger(spec);
-      // setMenuMap(getMenuMap(spec));
+      setLoading(false);
     }
   }, []);
 
@@ -29,17 +31,14 @@ export const OpenApi = ({ url, spec, theme }) => {
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
 
-
-
-
-  if (swagger){
-    return <Layout
+  return loading ?
+    <div className={styles.load7}>
+      <div className={styles.loader}>Loading...</div>
+    </div>
+    :
+    <Layout
       isMobile={width <= breakpoint}
       spec={swagger}
       theme={theme}
-      />
-    }
-  else{
-    return <div>Failed to load swagger, possible wrong swagger format.</div>
-  }
+    />
 };

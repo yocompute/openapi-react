@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { OpenApi } from 'openapi-react'
+import 'openapi-react/dist/index.css'
 
 const App = () => {
   
