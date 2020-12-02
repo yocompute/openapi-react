@@ -46,6 +46,31 @@ class Example extends Component {
 
 In your swagger.json, you can assign Markdown content to description, openapi-react will follow Markdown spec to render it.
 
+
+### Add or Modify Sections (swagger tags)
+
+```jsx
+import React, { Component } from 'react'
+
+import OpenApi from 'openapi-react'
+
+const tags = [{
+  name: 'Overview',
+  description: '### Why you need to use openapi-react\n\n\
+  *Execuatable restful api\n\n\
+  *Smaller size\n\n\
+  *Markdown syntax support\n\n\
+  *Easy to insert sections\n\n\
+  '
+}];
+
+class Example extends Component {
+  render() {
+    return <OpenApi url={"https://petstore.swagger.io/v2/swagger.json"} tags={tags}/>
+  }
+}
+```
+
 ### Use with theme
 
 ```jsx

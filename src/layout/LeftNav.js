@@ -43,16 +43,17 @@ const LeftNav = ({ menuMap, theme, onSelect }) => {
         setHover(h);
     }
 
+    // handle main menu item
     const handleClick = e => {
         const { param } = e.target.dataset;
         const cloned = { ...menuMap };
         cloned[param].expanded = !cloned[param].expanded;
-        SetMenuMap(cloned);
-        onSelect(cloned[param]);
+        onSelect({newMenuMap: cloned, param, subMenu: null});
     };
 
+    // item -- submenu item
     const handleSelect = item => {
-        onSelect(item);
+        onSelect({subMenu: item});
     };
 
     return <div style={leftNavStyle}>

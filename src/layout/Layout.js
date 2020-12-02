@@ -51,9 +51,17 @@ const Layout = ({isMobile, spec, theme, onSelect}) => {
     const [menuMap, SetMenuMap] = useState(getMenuMap(spec));
 
     // item --- item in menuMap or submenu
-    const handleSelect = menu => {
-      if(menu.ref){
-        menu.ref.current.scrollIntoView();
+    const handleSelect = (r) => {
+      if(!r.subMenu){
+        SetMenuMap(r.newMenuMap);
+        const menu = r.newMenuMap[r.param];
+        if(menu && menu.ref){
+          menu.ref.current.scrollIntoView();
+        }
+      }else{
+        if(r.subMenu.ref){
+          r.subMenu.ref.current.scrollIntoView();
+        }
       }
     };
 
