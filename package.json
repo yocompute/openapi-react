@@ -1,7 +1,7 @@
 {
   "name": "openapi-react",
-  "version": "0.0.21",
-  "description": "openapi, swagger document",
+  "version": "0.0.23",
+  "description": "openapi, swagger document, markdown",
   "author": "zlkca",
   "license": "MIT",
   "repository": {
@@ -62,6 +62,7 @@
     "openapi",
     "redoc",
     "swagger",
-    "restful"
+    "restful",
+    "markdown"
   ]
 }
