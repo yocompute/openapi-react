@@ -9,7 +9,7 @@ function Sections({ menuMap, route, definitionMap}) {
                 Object.keys(menuMap).map(k =>
                     <div key={k}>
                         {
-                            menuMap[k].items && menuMap[k].items.length > 0 &&
+                            // menuMap[k].items && menuMap[k].items.length > 0 &&
                             <Section menu={menuMap[k]} route={route} definitionMap={definitionMap}/>
                         }
                     </div>
