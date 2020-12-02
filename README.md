@@ -1,6 +1,6 @@
 # openapi-react
 
-> A better swagger 2.0 document than swagger-ui and redoc ! zero dependencies and much more smaller size. (openapi spec support is coming soon! )
+> A better swagger 2.0 document than swagger-ui and redoc ! (openapi spec support is coming soon! )
 
 [![NPM](https://img.shields.io/npm/v/openapi-react.svg)](https://www.npmjs.com/package/openapi-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -42,6 +42,34 @@ class Example extends Component {
 }
 ```
 
+### Support Markdown syntax for description
+
+In your swagger.json, you can assign Markdown content to description, openapi-react will follow Markdown spec to render it.
+
+
+### Add or Modify Sections (swagger tags)
+
+```jsx
+import React, { Component } from 'react'
+
+import OpenApi from 'openapi-react'
+
+const tags = [{
+  name: 'Overview',
+  description: '### Why you need to use openapi-react\n\n\
+  *Execuatable restful api\n\n\
+  *Smaller size\n\n\
+  *Markdown syntax support\n\n\
+  *Easy to insert sections\n\n\
+  '
+}];
+
+class Example extends Component {
+  render() {
+    return <OpenApi url={"https://petstore.swagger.io/v2/swagger.json"} tags={tags}/>
+  }
+}
+```
 
 ### Use with theme
 

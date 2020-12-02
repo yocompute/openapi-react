@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import Parameter from './Parameter';
+import marked from 'marked';
 import Response from './Response';
 import HttpIconText from './common/HttpIconText';
 import Playground from './common/Playground';
@@ -92,7 +92,7 @@ function Operation({ operation, route, definitionMap, theme }) {
                     {
                         operation.description &&
 
-                        <div style={styles.description}>{operation.description}</div>
+                        <div style={styles.description}  dangerouslySetInnerHTML={{ __html: marked(operation.description) }} />
                     }
                     {
                         route &&

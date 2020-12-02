@@ -311,7 +311,7 @@ const Playground = ({ route, operation, definitionMap, isMobile, theme }) => {
             {   
                 mode === 'try' && rsp &&
                 <div>
-                    <div><Curl route={route} operation={operation} rsp={rsp} /></div>
+                    <div><Curl route={route} operation={operation} /></div>
                     <div style={styles.response}>
                         <div>Server Response:</div>
                         <PlaygroundResponse rsp={rsp} />
