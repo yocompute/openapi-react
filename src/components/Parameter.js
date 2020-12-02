@@ -1,4 +1,5 @@
 import React from 'react';
+import marked from 'marked';
 import Schema from './Schema';
 
 const styles = {
@@ -60,7 +61,7 @@ function Parameter({param, definitionMap}) {
             }
             {
                 param && param.description &&
-                <span style={styles.description}>{param.description}</span>
+                <span style={styles.description} dangerouslySetInnerHTML={{ __html: marked(param.description) }} />
             }
             {
                 param && param.schema &&

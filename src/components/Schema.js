@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import marked from 'marked';
 
 const styles = {
     wrapper:{
@@ -61,7 +62,7 @@ function Schema({ name, definitionMap }) {
                                         <div>{`${k} [${schema.properties[k].type}]`}</div>
                                         {
                                             schema.properties[k].description &&
-                                            <div>{schema.properties[k].description}</div>
+                                            <div dangerouslySetInnerHTML={{ __html: marked(schema.properties[k].description) }} />
                                         }
                                     </div>
                             }

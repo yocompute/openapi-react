@@ -190,33 +190,6 @@ const Parameters = ({ route, operation, definitionMap, theme }) => {
         }
     }
 
-
-
-    // const renderParam = (p) => {
-    //     if (p.in === 'body') {
-    //         return <BodyParam
-    //             val={params[p.name].value}
-    //             param={p}
-    //             schema={getParamShema(p)}
-    //             onChange={handleBodyChange}
-    //         />
-
-    //     } else if (p.type === 'array') {
-    //         return <List
-    //             name={p.name}
-    //             items={p.items}
-    //             onSelect={handleSelectParam}
-    //         />
-    //     } else {
-    //         return <input
-    //             data-param={p.name}
-    //             style={styles.input}
-    //             placeholder={p.description}
-    //             onChange={handleParamChange}
-    //         />
-    //     }
-    // }
-
     const groupParams = (params) => {
         const paramMap = {
             path: [],
@@ -250,13 +223,6 @@ const Parameters = ({ route, operation, definitionMap, theme }) => {
                         {
                             grpMap[k].map(p => <div key={p.name} style={styles.param}>
                                 <Parameter param={p} definitionMap={definitionMap} />
-                                {/* <span style={styles.paramName}>{p.name}</span>
-                                <span style={styles.paramType}>{`[${getParamType(p)}]`}</span>
-                                {
-                                    p.required &&
-                                    <span style={styles.required}> *required</span>
-                                }
-                                <span style={styles.description}>{p.description}</span> */}
                             </div>
                             )
                         }
