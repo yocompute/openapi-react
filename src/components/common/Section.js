@@ -1,4 +1,5 @@
 import React from 'react';
+import marked from 'marked';
 import Paths from '../Paths';
 
 function Section({menu, route, definitionMap}) {
@@ -15,7 +16,7 @@ function Section({menu, route, definitionMap}) {
     return (
         <div ref={menu.ref}>
             <div style={styles.name}>{menu.name}</div>
-            <div style={styles.description}>{menu.description}</div>
+            <div style={styles.description} dangerouslySetInnerHTML={{ __html: marked(menu.description) }} />
             <Paths
                 paths={menu.pathMap}
                 route={route}

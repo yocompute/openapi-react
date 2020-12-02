@@ -54,7 +54,9 @@
   "files": [
     "dist"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "marked": "^1.2.5"
+  },
   "keywords": [
     "swagger UI",
     "openapi",
