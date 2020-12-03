@@ -18,12 +18,7 @@ const App = () => {
 
   const tags = [{
     name: 'Overview',
-    description: '### Why you need to use openapi-react\n\n\
-    *Execuatable restful api\n\n\
-    *Smaller size\n\n\
-    *Markdown syntax support\n\n\
-    *Easy to insert sections\n\n\
-    '
+    description: '#### Why you should try openapi-react ?\n\n\- Execuatable restful api\n\n\- Smaller size\n\n\- Markdown syntax support\n\n\- Easy to insert sections\n\n'
   }];
   
   return <OpenApi 
