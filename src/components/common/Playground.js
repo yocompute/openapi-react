@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import HttpIconText from './HttpIconText'
 import PlaygroundResponse from './PlaygroundResponse'
-import List from './List'
-import BodyParam from './BodyParam'
+import PlaygroundParam from './PlaygroundParam'
+
 import Curl from './Curl'
 
 const styles = {
@@ -19,9 +19,7 @@ const styles = {
     btn: {
         float: 'right',
     },
-    input: {
-        width: '95%'
-    },
+
     container: {
         padding: '25px 15px',
         backgroundColor: '#555',
@@ -114,23 +112,7 @@ const Playground = ({ route, operation, definitionMap, isMobile, theme }) => {
         setMode('view');
     }
 
-    const handleBodyChange = (name, val) => {
-        const paramMap = {...params};
-        paramMap[name].value = val ? JSON.parse(val) : null;
-        setParams(paramMap);
-    }
-
-    const handleSelectParam = (name, value) => {
-        const paramMap = {...params};
-        paramMap[name].value = value;
-        setParams(paramMap);
-    }
-
-    const handleParamChange = (event) => {
-        const { param } = event.target.dataset;
-
-        const paramMap = {...params};
-        paramMap[param].value = event.target.value;
+    const handleParamChange = (paramMap) => {
         setParams(paramMap);
     }
 
@@ -182,33 +164,6 @@ const Playground = ({ route, operation, definitionMap, isMobile, theme }) => {
         }
     }
 
-
-
-    const renderParam = (p, isMobile) => {
-        if(p.in === 'body'){
-            return <BodyParam
-                isMobile={isMobile}
-                val={params[p.name].value} 
-                param={p}
-                schema={getParamShema(p)}
-                onChange={handleBodyChange}
-                />
-            
-        } else if( p.type === 'array' ){
-            return <List
-                name={p.name} 
-                items={p.items}
-                onSelect={handleSelectParam}
-            />
-        }else{
-            return <input
-                data-param={p.name}
-                style={styles.input}
-                placeholder={p.description}
-                onChange={handleParamChange}
-            />
-        }
-    }
 
     const handleExecute = (event) => {
         event.preventDefault();
@@ -276,25 +231,14 @@ const Playground = ({ route, operation, definitionMap, isMobile, theme }) => {
                                 }
                             </div>
                             {
-                                renderParam(p, isMobile)
-                                // p.type === 'array' ?
-                                // <List
-                                //     name={p.name} 
-                                //     items={p.items}
-                                //     onSelect={handleSelectParam}
-                                // />
-                                // :
-                                // (p.type === 'body' ?
+                                <PlaygroundParam 
+                                param={p}
+                                params={params}
+                                definitionMap={definitionMap}
+                                isMobile={isMobile}
+                                onChange={handleParamChange}
+                            />
 
-                                // <BodyParam param={p} onChange={handleBodyChange}/>
-                                // :
-                                // <input
-                                // data-param={p.name}
-                                // style={styles.input}
-                                // placeholder={p.description}
-                                // onChange={handleParamChange}
-                                // />
-                                // )
                             }
                         </div>)
                     }
