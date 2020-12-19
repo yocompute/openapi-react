@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Parameter from './ParameterOld';
+import Parameter from './Parameter';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
