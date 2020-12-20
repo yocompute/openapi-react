@@ -64,7 +64,7 @@ const useStyles = makeStyles({
     name: {
         paddingLeft: '5px',
         float: 'left',
-        width: '180px',
+        width: '170px',
         display: 'flex'
     },
     nameText:{
@@ -73,7 +73,8 @@ const useStyles = makeStyles({
     type: {
         paddingLeft: '5px',
         float: 'left',
-        color: '#aaa'
+        color: '#aaa',
+        width: '110px'
     },
     required: {
         fontSize: '13px',
@@ -85,9 +86,9 @@ const useStyles = makeStyles({
     description: {
         paddingLeft: '20px',
         color: '#666',
-        fontSize: '12px',
+        fontSize: '13px',
         float: 'left',
-        marginTop: '-8px'
+        marginTop: '-11px'
     },
     icon:{
         borderTop: `1px solid #666`,
@@ -129,12 +130,17 @@ function Parameter({ param, schemaName, definitionMap }) {
 
     }
 
+    // const handleClick = (e) => {
+    //     const k = e;
+    //     console.log(e);
+    // }
+    
     function getSchemaData(name, definitionMap, schema) {
         const data = {};
         data.name = name;
         data.type = getType(schema);
         data.required = schema.required;
-
+        data.description = schema.description;
         if (schema.$ref) {
             const schemaName = getSchemaName(schema);
             if(schemaName){
@@ -185,7 +191,9 @@ function Parameter({ param, schemaName, definitionMap }) {
 
     const renderTree = (schema) => {
         return (
-            <TreeItem 
+            <TreeItem
+                key={schema.name}
+                // onLabelClick={handleClick}
                 nodeId={schema.name}
                 icon={<div className={schema.name===param.name ? classes.none : classes.icon}/>}
                 label={
@@ -193,7 +201,7 @@ function Parameter({ param, schemaName, definitionMap }) {
                     {
                         schema &&
                         <div className={classes.name}>
-                            <span classNam={classes.nameText}>{schema.name}</span>
+                            <span className={classes.nameText}>{schema.name}</span>
                         {
                             schema && schema.required &&
                             <span className={classes.required}> *required</span>
