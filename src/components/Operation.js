@@ -1,10 +1,18 @@
 import React, { useRef, useEffect, useState } from 'react';
 import marked from 'marked';
-import Response from './Response';
 import HttpIconText from './common/HttpIconText';
 import Playground from './common/Playground';
 import Parameters from './Parameters';
+import Responses from './Responses';
 
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    responseTitle: {
+        padding: '10px',
+        color: '#aaa',
+    }
+}));
 const styles = {
     block: {
         // padding: "10px"
@@ -69,6 +77,7 @@ const mobileStyles = {
 }
 
 function Operation({ operation, route, definitionMap, theme }) {
+    const classes = useStyles();
     const myRef = useRef();
     const [width, setWidth] = useState(window.innerWidth);
     const breakpoint = 767;
@@ -104,12 +113,13 @@ function Operation({ operation, route, definitionMap, theme }) {
                     <Parameters route={route} operation={operation} definitionMap={definitionMap} />
                     {
                         operation.responses &&
-                        <div style={styles.responses}>
-                            {
-                                Object.keys(operation.responses).map(code => <Response key={code} rsp={operation.responses[code]} />)
-                            }
-                        </div>
+                        <div className={classes.responseTitle}>{`Responses:`.toUpperCase()}</div>
                     }
+                    {
+                        operation.responses &&
+                        <Responses responses={operation.responses}  definitionMap={definitionMap}/>
+                    }
+
                 </div>
             </div>
             <div style={width <= breakpoint ? mobileStyles.playground : styles.playground}>
