@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Parameter from './ParameterOld';
+import Parameter from './Parameter';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -201,7 +201,7 @@ const Parameters = ({ route, operation, definitionMap, theme }) => {
                     <div className={classes.groupName}>{`${k} parameters:`.toUpperCase()}</div>
                     {  
                         // grpMap[k].map(p => <Parameter key={p.name} param={p} definitionMap={definitionMap} />)
-                        grpMap[k].map(p => <Parameter param={p} schemaName={getShemaName(p.schema)} definitionMap={definitionMap}/>)
+                        grpMap[k].map(p => <Parameter key={p.name} param={p} schemaName={getShemaName(p.schema)} definitionMap={definitionMap}/>)
                     }
                 </div>
             )
