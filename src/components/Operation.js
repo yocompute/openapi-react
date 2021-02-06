@@ -90,8 +90,12 @@ function Operation({ operation, route, definitionMap, theme }) {
         return () => window.removeEventListener("resize", handleWindowResize);
     }, []);
 
+    const getId = (route) => {
+        return `${route.operationKey}-${route.url.replace(/\//g, '-').replace(/\{/g, '-').replace(/\}/g, '-')}`;
+    }
+
     return (
-        <div ref={myRef} style={width <= breakpoint ? mobileStyles.block : styles.block}>
+        <div ref={myRef} style={width <= breakpoint ? mobileStyles.block : styles.block} id={getId(route)}>
             <div style={width <= breakpoint ? mobileStyles.content : styles.content}>
                 <div style={styles.operationContent}>
                     {

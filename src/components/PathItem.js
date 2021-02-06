@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Operation from './Operation';
 
 function PathItem({pathItem, route, menuItems, definitionMap}) {
@@ -8,12 +8,14 @@ function PathItem({pathItem, route, menuItems, definitionMap}) {
         const menuItem = menuItems.find(it => it.operationKey === opk);
         return menuItem ? menuItem.ref : null;
     }
+    
+
 
     return (
         <div>
             {
                 operations.map(operationKey =>
-                    <div key={operationKey} ref={getRef(operationKey)}>
+                    <div key={operationKey} ref={getRef(operationKey)} >
                         {
                             pathItem[operationKey] &&
                             <Operation 

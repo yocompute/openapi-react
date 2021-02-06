@@ -189,6 +189,7 @@ function Parameter({ param, schemaName, definitionMap }) {
         }
     }, [schemaName]);
 
+
     const renderTree = (schema) => {
         return (
             <TreeItem
