@@ -62,9 +62,7 @@ function App() {
 ### Use with theme
 
 ```jsx
-import React, { Component } from 'react'
-
-import OpenApi from 'openapi-react'
+import { OpenApi } from 'openapi-react'
 
 const theme = {
   layout:{
@@ -74,10 +72,8 @@ const theme = {
   }
 }
 
-class Example extends Component {
-  render() {
+function App() {
     return <OpenApi spec={swaggerJsonObject} theme={theme} />
-  }
 }
 ```
 
