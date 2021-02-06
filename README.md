@@ -42,9 +42,7 @@ In your swagger.json, you can assign Markdown content to description, openapi-re
 ### Add or Modify Sections (swagger tags)
 
 ```jsx
-import React, { Component } from 'react'
-
-import OpenApi from 'openapi-react'
+import { OpenApi } from 'openapi-react'
 
 const tags = [{
   name: 'Overview',
@@ -56,10 +54,8 @@ const tags = [{
   '
 }];
 
-class Example extends Component {
-  render() {
+function App() {
     return <OpenApi url={"https://petstore.swagger.io/v2/swagger.json"} tags={tags}/>
-  }
 }
 ```
 
