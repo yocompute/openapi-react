@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import Sections from './Sections';
 
+import defaultTheme from '../theme';
 const { innerHeight } = window;
 
 function Content({spec, menuMap, theme, isMobile, onScroll}){
 
     const styles = {
-        width: isMobile? '100%' : 'calc(100% - 260px)',
+        width: isMobile? '100%' : `calc(100% - ${defaultTheme.leftNav.expandedWidth})`,
         height: innerHeight,
         overflowY: 'scroll',
         float: 'left'

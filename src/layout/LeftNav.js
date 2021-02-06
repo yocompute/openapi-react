@@ -7,12 +7,13 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
+import defaultTheme from '../theme';
 const { innerHeight } = window;
 
 const LeftNav = ({ value, menuMap, theme, onSelect }) => {
     const useStyles = makeStyles((t) => ({
         root: {
-            width: theme && theme.LeftNav ? theme.LeftNav.width : '360px',
+            width: theme && theme.LeftNav ? theme.LeftNav.width : defaultTheme.leftNav.expandedWidth,
             backgroundColor: t.palette.background.paper,
             float: 'left',
             // height: innerHeight,
