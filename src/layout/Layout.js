@@ -8,7 +8,7 @@ const styles = {
 
 // path { op, url }
 const Layout = ({isMobile, spec, theme, onSelect}) => {
-
+    const [tag, setTag] = useState();
     const getMenuMap = spec => {
         const pathKeys = Object.keys(spec.paths);
         const mMap = {};
@@ -48,6 +48,10 @@ const Layout = ({isMobile, spec, theme, onSelect}) => {
         return mMap;
     };
 
+    const handleScroll = (tag) => {
+      setTag(tag);
+    }
+
     const [menuMap, SetMenuMap] = useState(getMenuMap(spec));
 
     // item --- item in menuMap or submenu
@@ -68,7 +72,8 @@ const Layout = ({isMobile, spec, theme, onSelect}) => {
     return <div style={{height: '100%'}}>
     {
       !isMobile &&
-      <LeftNav 
+      <LeftNav
+        value={tag}
         menuMap={menuMap}
         theme={theme && theme.layout ? theme.layout: {}}
         onSelect={handleSelect}
@@ -79,6 +84,7 @@ const Layout = ({isMobile, spec, theme, onSelect}) => {
       menuMap={menuMap}
       theme={theme && theme.layout ? theme.layout: {}}
       isMobile={isMobile}
+      onScroll={handleScroll}
     />
   </div>
 }

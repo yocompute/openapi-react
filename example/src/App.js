@@ -24,7 +24,7 @@ const App = () => {
   return <OpenApi 
     url={"https://petstore.swagger.io/v2/swagger.json"}
     tags={tags}
-    theme={theme}
+    // theme={theme}
   />
 }
 
