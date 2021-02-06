@@ -18,27 +18,19 @@ npm install --save openapi-react
 
 #### Load by url:
 ```jsx
-import React, { Component } from 'react'
+import { OpenApi } from 'openapi-react'
 
-import OpenApi from 'openapi-react'
-
-class Example extends Component {
-  render() {
+function App() {
     return <OpenApi url={"https://petstore.swagger.io/v2/swagger.json"} />
-  }
 }
 ```
 
 #### Load by swagger json object
 ```jsx
-import React, { Component } from 'react'
+import { OpenApi } from 'openapi-react'
 
-import OpenApi from 'openapi-react'
-
-class Example extends Component {
-  render() {
+function App() {
     return <OpenApi spec={swaggerJsonObject} />
-  }
 }
 ```
 

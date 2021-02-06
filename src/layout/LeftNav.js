@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,7 +9,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const { innerHeight } = window;
 
-const LeftNav = ({ menuMap, theme, onSelect }) => {
+const LeftNav = ({ value, menuMap, theme, onSelect }) => {
     const useStyles = makeStyles((t) => ({
         root: {
             width: theme && theme.LeftNav ? theme.LeftNav.width : '360px',
@@ -28,6 +28,10 @@ const LeftNav = ({ menuMap, theme, onSelect }) => {
 
     const classes = useStyles();
     const [selected, setSelected] = useState();
+
+    useEffect(() => {
+        setSelected(value);
+    }, [value]);
 
     const handleClick = (e, item, hasSubMenus) => {
         if (typeof item === 'string') {
