@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './layout/Layout';
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
 export const OpenApi = ({ url, spec, tags, theme }) => {
 
@@ -17,7 +17,7 @@ export const OpenApi = ({ url, spec, tags, theme }) => {
       }
     });
     return tags;
-  }
+  };
 
   useEffect(() => {
     if(url){
@@ -29,7 +29,7 @@ export const OpenApi = ({ url, spec, tags, theme }) => {
           }
           setSwagger(t);
           setLoading(false);
-        })
+        });
     } else if(spec){
       if(tags){
         spec.tags = combineTags(spec, tags);
@@ -40,14 +40,15 @@ export const OpenApi = ({ url, spec, tags, theme }) => {
   }, []);
 
   useEffect(() => {
-    const handleWindowResize = () => setWidth(window.innerWidth)
+    const handleWindowResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleWindowResize);
 
     // Return a function from the effect that removes the event listener
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
 
-  return loading ?
+  return (
+    loading ?
     <div className={styles.load7}>
       <div className={styles.loader}>Loading...</div>
     </div>
@@ -57,4 +58,5 @@ export const OpenApi = ({ url, spec, tags, theme }) => {
       spec={swagger}
       theme={theme}
     />
+  );
 };

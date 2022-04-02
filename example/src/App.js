@@ -16,14 +16,14 @@ const App = () => {
     }
   }
 
-  const tags = [{
+  const menus = [{
     name: 'Overview',
     description: '#### Why you should try openapi-react ?\n\n- Execuatable restful api\n\n- Smaller size\n\n- Markdown syntax support\n\n- Easy to insert sections\n\n'
   }];
   
   return <OpenApi 
     url={"https://petstore.swagger.io/v2/swagger.json"}
-    tags={tags}
+    tags={menus}
     // theme={theme}
   />
 }
