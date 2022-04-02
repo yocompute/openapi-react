@@ -107,4 +107,5 @@ dist
 node_modules
 package-lock.json
 example/build
+example/package-lock.json
 
