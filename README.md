@@ -5,7 +5,7 @@
 [![NPM](https://img.shields.io/npm/v/openapi-react.svg)](https://www.npmjs.com/package/openapi-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Demo
-[See our Demo](https://doc.yocompute.com/)
+[See our Demo](https://zlkca.github.io/)
 
 ## Install
 
