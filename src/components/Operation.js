@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import marked from 'marked';
+import { marked } from 'marked';
 import HttpIconText from './common/HttpIconText';
 import Playground from './common/Playground';
 import Parameters from './Parameters';

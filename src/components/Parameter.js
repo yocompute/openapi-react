@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import marked from 'marked';
+import { marked } from 'marked';
 import PropTypes from 'prop-types';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { fade, makeStyles, withStyles } from '@material-ui/core/styles';

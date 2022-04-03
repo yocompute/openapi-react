@@ -1,5 +1,5 @@
 import React from 'react';
-import marked from 'marked';
+import { marked } from 'marked';
 import Paths from '../Paths';
 
 function Section({menu, route, definitionMap}) {
